@@ -1,0 +1,29 @@
+.loader-wrapper {
+  display: flex;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  z-index: 9999;
+  width: fit-content;
+  height: fit-content;
+}
+
+.square-loader {
+  transform: rotate(-90deg); 
+}
+
+.svg-tracer {
+  animation: trace-svg 2s linear infinite;
+  stroke-linecap: round;
+}
+
+@keyframes trace-svg {
+  0% {
+    stroke-dashoffset: 200;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

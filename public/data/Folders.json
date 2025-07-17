@@ -1,0 +1,100 @@
+{
+    "data" : [
+        {
+            "_id" : "1",
+            "name" : "Frontend Developer",
+            "total_size" : 123,
+            "owner_id" : "2252563",
+            "is_folder" : true,
+            "parent_folder_id" : "",
+            "created_at" : "06-07-2025",
+            "updated_at" : "07-07-2025",
+            "opened_at" : "",
+            "description" : "The best platform for files storage",
+            "is_deleted" : false,
+            "deleted_at" : "",
+            "tag_ids" : [{"name" : "memory", "_id" : "16" }],
+            "storage_detail" : {
+                "size" : 123,
+                "mime_type" : "",
+                "is_uploaded" : true,
+                "is_uploading" : false,
+                "storage_provider" : "",
+                "storage_key" : "",
+                "storage_bucket" : ""
+            }
+        },
+        {
+            "_id" : "2",
+            "name" : "Backend Developer",
+            "total_size" : 74.6,
+            "owner_id" : "2252563",
+            "is_folder" : true,
+            "parent_folder_id" : "",
+            "created_at" : "02-07-2025",
+            "updated_at" : "07-09-2025",
+            "opened_at" : "",
+            "description" : "",
+            "is_deleted" : false,
+            "deleted_at" : "",
+            "tag_ids" : [{"name" : " love", "_id" : "12" }],
+            "storage_detail" : {
+                "size" : 74.6,
+                "mime_type" : "",
+                "is_uploaded" : true,
+                "is_uploading" : false,
+                "storage_provider" : "",
+                "storage_key" : "",
+                "storage_bucket" : ""
+            }
+        },
+        {
+            "_id" : "3",
+            "name" : "QC",
+            "total_size" : 22.43,
+            "owner_id" : "2252563",
+            "is_folder" : false,
+            "parent_folder_id" : "",
+            "created_at" : "06-07-2025",
+            "updated_at" : "07-07-2025",
+            "opened_at" : "",
+            "description" : "",
+            "is_deleted" : false,
+            "deleted_at" : "",
+            "tag_ids" : [{"name" : " university", "_id" : "15" }],
+            "storage_detail" : {
+                "size" : 22.43,
+                "mime_type" : "",
+                "is_uploaded" : true,
+                "is_uploading" : false,
+                "storage_provider" : "",
+                "storage_key" : "",
+                "storage_bucket" : ""
+            }
+        },
+        {
+            "_id" : "4",
+            "name" : "Project Manager",
+            "total_size" : 22.62,
+            "owner_id" : "2252563",
+            "is_folder" : false,
+            "parent_folder_id" : "",
+            "created_at" : "06-07-2025",
+            "updated_at" : "07-07-2025",
+            "opened_at" : "",
+            "description" : "",
+            "is_deleted" : false,
+            "deleted_at" : "",
+            "tag_ids" : [{"name" : " university", "_id" : "15" }],
+            "storage_detail" : {
+                "size" : 22.62,
+                "mime_type" : "",
+                "is_uploaded" : true,
+                "is_uploading" : false,
+                "storage_provider" : "",
+                "storage_key" : "",
+                "storage_bucket" : ""
+            }
+        }
+    ]
+}

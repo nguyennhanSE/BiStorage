@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+
+.background {
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-image: url('/landingPage/background4.jpg');
+    background-size: cover;
+    background-position: center;
+   
+  }
+
+
+.the-perfect-home {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.combined-text {
+  font-family: 'Lato', sans-serif;
+  font-weight: 350;
+  letter-spacing: 0.03em;
+}

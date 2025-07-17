@@ -1,0 +1,26 @@
+{
+    "data" : {
+        "_id" : "201120312",
+        "name" : "BiStorage App",
+        "total_size" : 72.12,
+        "owner_id" : "2252563",
+        "is_folder" : false,
+        "parent_folder_id" : "",
+        "created_at" : "06-07-2025",
+        "updated_at" : "07-07-2025",
+        "opened_at" : "",
+        "description" : "The best platform for files storage",
+        "is_deleted" : false,
+        "deleted_at" : "",
+        "tag_ids" : [],
+        "storage_detail" : {
+            "size" : 72.12,
+            "mime_type" : "pdf",
+            "is_uploaded" : true,
+            "is_uploading" : false,
+            "storage_provider" : "",
+            "storage_key" : "",
+            "storage_bucket" : ""
+        }
+    }
+}
