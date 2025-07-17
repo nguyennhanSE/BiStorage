@@ -11,6 +11,7 @@ import ParentAndChild from "../../public/data/ParentAndChild.json";
 
 //temporate for FileInfo
 import FileInfo from "../../public/data/FileInfo.json";
+import { PermissionFileType } from '@/stores/FilePermissionStore'
 
 
 export function useFileHook() {
@@ -140,9 +141,10 @@ export function useFileHook() {
     };
 
     // Tạm thời
-    const fetchFilePermissonById = (index : number) => {
-        return ParentAndChild.child[index];
-    }
+    const fetchFilePermissonById = (id: string): PermissionFileType[] => {
+        return ParentAndChild.child
+          .filter((x) => x.parent_folder_id === id).map((file) => ({ ...file, child: [] })); 
+    };
 
     const getPreviewUrl = async(id : string) => {
         try{

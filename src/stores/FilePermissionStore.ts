@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import type { Tag } from '../models/Interface'
 
-interface PermissionFileType {
+export interface PermissionFileType {
   _id: string
   name: string
   total_size: number

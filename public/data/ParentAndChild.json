@@ -121,6 +121,30 @@
                 "storage_key" : "",
                 "storage_bucket" : ""
             }
+        },
+        {
+            "_id" : "2352568",
+            "name" : "Valorant",
+            "total_size" : 36.36,
+            "owner_id" : "2252563",
+            "is_folder" : false,
+            "parent_folder_id" : "2252566",
+            "created_at" : "06-07-2025",
+            "updated_at" : "07-07-2025",
+            "opened_at" : "",
+            "description" : "The best platform for files storage",
+            "is_deleted" : false,
+            "deleted_at" : "",
+            "tag_ids" : [{"name" : "love", "_id" : "36" }],
+            "storage_detail" : {
+                "size" : 36.36,
+                "mime_type" : "docx",
+                "is_uploaded" : true,
+                "is_uploading" : false,
+                "storage_provider" : "",
+                "storage_key" : "",
+                "storage_bucket" : ""
+            }
         }
     ]
     
