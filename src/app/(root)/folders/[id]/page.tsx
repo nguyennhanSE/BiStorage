@@ -12,6 +12,7 @@ import { RxAvatar } from "react-icons/rx";
 import { DropDownMenuAllFiles } from "@/components/allFiles/DropDownMenu";
 import { useEffect } from "react";
 import { breadCrumbItem, useBreadCrumbStore } from "@/stores/BreadCrumbStore";
+import { useLoadingStore } from "@/stores/LoadingStore";
 
 const Page = () => {
     const router = useRouter();
@@ -20,7 +21,6 @@ const Page = () => {
     const searchParams = useSearchParams();
     const id = params.id;
     const name = searchParams.get('name');
-
     const {addBreadCrumbList} = useBreadCrumbStore();
     useEffect(() => {
         if(!name) return;
@@ -30,6 +30,13 @@ const Page = () => {
         }
         addBreadCrumbList(item)
     },[])
+
+    // Loading State
+    const {setLoading} = useLoadingStore();
+    useEffect(()=> {
+        setLoading(false);
+    },[setLoading])
+
     
     return(
         <section className="w-full h-full">

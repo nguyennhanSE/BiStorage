@@ -7,6 +7,7 @@ import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
+import { UploadButton } from "../common/UploadButton";
 
 const Sidebar = () => { 
     const [chosenPage, setChosenPage] = useState("");
@@ -30,6 +31,9 @@ const Sidebar = () => {
         setLoading(true);
         router.push(url);
     }
+    // UploadButton setOpen
+    const [isOpen,setIsOpen] = useState(false);
+
     return(
         <section className="w-full h-full flex gap-2 py-7 px-5 overflow-auto custom-scrollbar">
             <div className="flex flex-col gap-10">
@@ -72,16 +76,14 @@ const Sidebar = () => {
                         <Image src="/Sidebar/blink.svg" alt="blink icon" width={35} height={35} className="bg-[#DFF4E5]" />
                     </div>
                     <div className="text-sm text-gray-600">The only file storage platform that you need</div>
-                    <button className="w-[50%] ml-auto h-[30px] rounded-lg border border-black flex items-center justify-center cursor-pointer">
-                        <span className="text-sm text-black">Upload</span>
+                    <button onClick={() => setIsOpen(true)} className="group w-[50%] ml-auto h-[30px] rounded-lg border border-black flex items-center justify-center cursor-pointer hover:bg-black">
+                        <span className="text-sm text-black group-hover:text-white">Upload</span>
                     </button>
                     <Image width={50} height={50} src="/Sidebar/leaf.svg" alt="overlay"  style={{ width: "80%", height: "80%", position: "absolute", zIndex: 1, top:"80px",right:"120px" }}/>
                 </div>
                 {/* Memory */}
             </div>
-                {/* <div className="h-full w-[2px] bg-black">
-
-                </div> */}
+            {isOpen && <UploadButton setIsOpen={setIsOpen}></UploadButton>}
         </section>
     )
 }

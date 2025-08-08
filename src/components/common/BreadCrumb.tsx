@@ -11,7 +11,7 @@ export function BreadCrumb () {
         router.push(x.url);
     }
     return (
-        <nav className="flex items-center flex-wrap pt-10 pb-5">
+        <nav className="flex items-center flex-wrap pt-3 pb-5">
             <ul className="text-gray-800 text-lg flex items-center space-x-2 flex-wrap">
                 {breadCrumbList.map((x,index) => (
                     <li key={index} className="flex items-center text-base">

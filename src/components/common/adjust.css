@@ -19,3 +19,12 @@
     width: 90%;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE, Edge */
+  scrollbar-width: none;     /* Firefox */
+}

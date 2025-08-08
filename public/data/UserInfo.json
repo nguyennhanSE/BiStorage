@@ -1,0 +1,24 @@
+{
+    "data" : [
+    {
+        "name" : "Wade",
+        "email" : "wade@gmail.com",
+        "avatar" : "/data/temp-1.jpg"
+    },
+    {
+        "name" : "Wade",
+        "email" : "wade@gmail.com",
+        "avatar" : "/data/temp-1.jpg"
+    },
+    {
+        "name" : "Wade",
+        "email" : "wade@gmail.com",
+        "avatar" : "/data/temp-1.jpg"
+    },
+    {
+        "name" : "Jenry",
+        "email": "TomAndJenry@gmail.com",
+        "avatar" : "/data/temp-2.jpg"
+    }
+]
+}
