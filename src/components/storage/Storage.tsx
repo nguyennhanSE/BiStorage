@@ -4,6 +4,7 @@ import { FaFolderClosed } from "react-icons/fa6";
 import foldersData from '../../../public/data/Folders.json';
 import { useRouter } from "next/navigation";
 import { useLoadingStore } from "@/stores/LoadingStore";
+import { DropDownMenuStorage } from "../allFiles/DropDownMenu";
 
 const Storage = () => {
     const router = useRouter();
@@ -15,13 +16,16 @@ const Storage = () => {
             </h2>
             <div className="w-full flex gap-4 ">  
                 {foldersData.data.map((x) => (
-                    <div onDoubleClick={() => {router.push(`/folders/${x._id}?name=${encodeURIComponent(x.name)}`); setLoading(true)}} key={x._id} className="bg-[#DFF4E5] rounded-lg min-h-[120px] min-w-[250px] p-3 flex flex-col justify-between cursor-pointer">
+                    <div onDoubleClick={() => {router.push(`/folders/${x._id}?name=${encodeURIComponent(x.name)}`); setLoading(true)}} key={x._id} className="bg-[#DFF4E5] rounded-lg min-h-[120px] min-w-[250px] p-3 flex flex-col justify-between cursor-pointer shadow-md">
                         <FaFolderClosed size={30}></FaFolderClosed>
                         <div className="w-full flex flex-col gap-1">
                             <div className="font-semibold text-black text-sm">{x.name}</div>
                             <div className="w-full flex justify-between py-1">
                                 <span className="text-gray-400 text-sm">{x.total_size} Gb</span>
-                                <div className="px-2 text-center bg-[#ecfff1] text-sm rounded-lg text-gray-600">{x.created_at}</div>
+                                <div className="flex items-center gap-1 ">
+                                    <div className="px-2 text-center bg-[#ecfff1] text-sm rounded-lg text-gray-600">{x.created_at}</div>
+                                    <DropDownMenuStorage file={x}></DropDownMenuStorage>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -12,11 +12,10 @@ export const FileDetail = ({fileId , setIsOpen} : {fileId :string, setIsOpen: (v
           setFileData(res);
         };
         fetchData();
-        console.log('data',fileData); 
       });
 
     return(
-        <div className={`fixed top-0 right-0 h-full bg-white shadow-lg w-96 p-6 z-99`}>
+        <div className={`fixed top-0 right-0 h-full bg-white shadow-lg w-96 p-6 z-99 overflow-y-auto text-sm font-sans`}>
             <button className="absolute top-4 right-4 text-2xl font-bold text-gray-500 hover:text-gray-700" onClick={() => setIsOpen(false)} >x</button>
             {fileData ? 
             (

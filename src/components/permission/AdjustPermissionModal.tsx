@@ -1,6 +1,6 @@
 'use client';
-import "./adjust.css";
 
+import "./adjust-modal.css"
 import { FaFolder } from "react-icons/fa";
 import { FolderOpen } from "lucide-react";
 import { useFileHook } from "@/hooks/FileHook";
@@ -73,7 +73,7 @@ export function AdjustPermissionModal({ files,depth = 0 }: { files?: PermissionF
         <div className="w-full h-full space-y-5 overflow-y-auto">
             {data.map((x) =>
                 !x.is_folder ? (
-                    <div key={x._id} className={`w-full  flex justify-between px-4 py-3 ${depth === 0 ? 'rounded-lg border border-[#dcc097]' : ''}  `}>
+                    <div onClick={(e) => {e.stopPropagation();}} key={x._id} className={`w-full  flex justify-between px-4 py-3 ${depth === 0 ? 'rounded-lg border border-[#dcc097]' : ''}  `}>
                         <div className="flex gap-2 items-center">
                             <FaFolder size={20} className="fill-[#dcc097]" />
                             <span className="text-gray-500 text-md">{x.name}</span>

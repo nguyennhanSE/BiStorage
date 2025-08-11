@@ -1,6 +1,8 @@
 'use client'
 
 import { axiosInstance } from '@/lib/axios'
+import UserInfo from '../../public/data/UserInfo.json'
+const Users = UserInfo.data;
 
 export function useUserHook (){
 
@@ -21,8 +23,12 @@ export function useUserHook (){
         }
     };
 
-    return {
-        findUser    
+    const findUserTemp = () => {
+        return Users;
+    }
 
+    return {
+        findUser,
+        findUserTemp
     }
 }

@@ -3,22 +3,26 @@
     {
         "name" : "Wade",
         "email" : "wade@gmail.com",
-        "avatar" : "/data/temp-1.jpg"
+        "avatar" : "/data/temp-1.jpg",
+        "permission" : "edit"
     },
     {
-        "name" : "Wade",
-        "email" : "wade@gmail.com",
-        "avatar" : "/data/temp-1.jpg"
+        "name" : "Fenrir",
+        "email" : "fenrir@gmail.com",
+        "avatar" : "/data/temp-1.jpg",
+        "permission" : "view"       
     },
     {
-        "name" : "Wade",
-        "email" : "wade@gmail.com",
-        "avatar" : "/data/temp-1.jpg"
+        "name" : "Elise",
+        "email" : "elise@gmail.com",
+        "avatar" : "/data/temp-1.jpg",
+        "permission" : "edit"
     },
     {
-        "name" : "Jenry",
-        "email": "TomAndJenry@gmail.com",
-        "avatar" : "/data/temp-2.jpg"
+        "name" : "James",
+        "email": "james@gmail.com",
+        "avatar" : "/data/temp-2.jpg",
+        "permission" : "view"
     }
 ]
 }
