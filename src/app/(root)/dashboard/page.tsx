@@ -12,7 +12,7 @@ const Page = () => {
         resetBreadcrumb();
     },[resetBreadcrumb])
     return (
-        <section className="w-full h-full">
+        <section className="w-full h-full ">
             {/* Header */}
             <div className="left-[20%] fixed top-0 w-[80%] pt-3 h-[64px] bg-white z-40">
                 <Header></Header>

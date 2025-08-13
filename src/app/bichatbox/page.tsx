@@ -4,7 +4,6 @@ import { RiWechatChannelsLine } from "react-icons/ri";
 import { FaGithub } from "react-icons/fa";
 import { FaDiscord } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { FaArrowCircleUp } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { TbTableDashed } from "react-icons/tb";
 import { TbTableExport } from "react-icons/tb";
@@ -17,14 +16,42 @@ import { IoIosArrowDown } from "react-icons/io";
 import { RxAvatar } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import { useLoadingStore } from "@/stores/LoadingStore";
+import { BiChatBoxHomePage } from "@/components/chatbox/HomePage";
+import ChatBox from "@/components/chatbox/ChatBox";
 
 const Page = () => {
     const router = useRouter();
-    const [showSidebar,setShowSideBar] = useState(true);
+    const [showSidebar,setShowSideBar] = useState(false);
     const {setLoading} = useLoadingStore();
     useEffect(()=> {
         setLoading(false);
     },[setLoading])
+
+    // Enter Chatbox
+    const [enterChat,setEnterChat] = useState(false);
+    const [mounted, setMounted] = useState(false);
+    // New chatbox
+    const [newChat, setNewChat] = useState(false);
+
+    useEffect(() => {
+        if (!mounted) {
+            return;
+        }
+        if (enterChat){
+            try {
+                localStorage.setItem('enterChat', enterChat ? 'true' : 'false');
+            } catch {}
+        }
+    }, [enterChat,mounted]);
+    // Check if user has entered chatbox before
+    useEffect(() => {
+        setMounted(true);
+        const storedValue = localStorage.getItem('enterChat');
+        if (storedValue === 'true') {
+            setEnterChat(true);
+        }
+    }, []);
+    if (!mounted) return null;
 
     return (
         <div className="flex h-screen w-full">
@@ -41,7 +68,7 @@ const Page = () => {
                         <span className="text-md font-bold text-black">BiChatBox</span>
                     </div>
                     <div className="flex items-center gap-3">
-                        <button onClick={() => {setLoading(true);router.push('/dashboard')}} className="px-5 text-gray-500 text-sm text-center py-1 border bg-transparent rounded-full cursor-pointer border-gray-400 hover:bg-[#7DAFAF] hover:text-white hover:border-white flex items-center justify-center">
+                        <button onClick={() => {setLoading(true);router.push('/dashboard')}} className="px-5 text-gray-500 text-sm text-center py-1 border bg-transparent rounded-full cursor-pointer border-gray-400 hover:bg-[#7DAFAF] hover:text-white hover:border-white flex items-center justify-center transition">
                             Back
                         </button>
                         <TbTableDashed onClick={()=>setShowSideBar(true)} size={18} className={`${showSidebar ? 'opacity-0' : 'opacity-100'} text-gray-800 hover:text-[#7DAFAF] cursor-pointer`}></TbTableDashed>
@@ -49,26 +76,13 @@ const Page = () => {
 
                 </div>
                 {/* Nội dung */}
-                <div className="w-full h-[90%] py-5 px-20">
-                    <div className="w-full h-full bg-white/70 border rounded-2xl border-gray-200 backdrop-blur-sm flex flex-col">
-                        <div className="flex-grow overflow-y-auto p-4">
-                            <div className="w-full flex flex-col gap-3 pt-10 pl-10">
-                                <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#7DAFAF] via-[#c084fc] to-[#facc15] pb-2">
-                                Hello NguyenNhan
-                                </h1>
-                                <span className="text-4xl font-semibold text-gray-400">How can I help you today?</span>
-                            </div>
-                        </div>
-                        <div className="px-10 py-4 flex justify-center items-center ">
-                            <div className="relative w-full">
-                                <input type="text" placeholder="Ask something..." className="w-full text-sm flex-grow p-2 border rounded-2xl outline-none bg-gray-200"/>
-                                <FaArrowCircleUp size={20} className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer hover:text-[#7DAFAF]"></FaArrowCircleUp>
-                            </div>
-                        </div>
+                <div className="w-full h-[93%] py-5 px-20">
+                    <div className="w-full h-full bg-white/70 border rounded-2xl border-gray-200 backdrop-blur-sm ">
+                        {!enterChat ? <BiChatBoxHomePage setEnterChat={setEnterChat} /> : <ChatBox newChat={newChat} />}
                     </div>
                 </div>
                 {/* Thanh dưới cùng */}
-                <div className=" w-full h-[5%] flex justify-between items-center">
+                <div className=" w-full h-[2%] flex justify-between items-center">
                     <div className="flex gap-3 items-center">
                         <FaXTwitter size={15} className="text-gray-500"></FaXTwitter>
                         <FaGithub size={15} className="text-gray-500"></FaGithub>
@@ -90,7 +104,7 @@ const Page = () => {
                         <TbTableExport onClick={() => setShowSideBar(false)} size={18} className="text-gray-800 cursor-pointer hover:text-[#7DAFAF]"></TbTableExport>
                         <RxAvatar size={25} className="text-gray-800"></RxAvatar>
                     </div>
-                    <button className="w-full py-2 rounded-full flex items-center justify-center bg-[#7DAFAF] cursor-pointer hover:bg-[#4A7777]">
+                    <button onClick={() => setNewChat(!newChat)} className="w-full py-2 rounded-full flex items-center justify-center bg-[#7DAFAF] cursor-pointer hover:bg-[#4A7777] transition">
                         <div className="flex gap-2 items-center ">
                             <FaPlus size={15} className="text-white"/>
                             <span className="text-white text-sm">New Chat</span>

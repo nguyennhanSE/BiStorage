@@ -8,7 +8,7 @@ export const axiosInstance = () => {
         
         return instance;
     }
-    const service1Axios = createAxiosInstance(process.env.BASE_URL!)
+    const service1Axios = createAxiosInstance(process.env.NEXT_PUBLIC_BASE_URL!);
     return {
         service1Axios
     }

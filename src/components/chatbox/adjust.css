@@ -1,0 +1,30 @@
+.slide-up {
+  animation: slideUp 0.3s linear forwards;
+}
+
+@keyframes slideUp {
+  0%   { transform: translateY(0);    opacity: 1; }
+  100% { transform: translateY(-50px); opacity: 0; }
+}
+
+
+/* globals.css */
+.type-wipe {
+  display: inline;
+  -webkit-mask-image: linear-gradient(90deg, #000 0 0);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 0% 100%;
+  animation: wipe-reveal var(--dur, 1.6s) steps(var(--steps, 40)) forwards;
+}
+@keyframes wipe-reveal {
+  to { -webkit-mask-size: 100% 100%; }
+}
+
+/* bubble vào khung nhẹ */
+.bubble-in {
+  animation: bubble-in .22s ease-out both;
+}
+@keyframes bubble-in {
+  from { transform: translateY(8px) scale(.98); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}

@@ -41,7 +41,7 @@ const Page = () => {
               <button className="bg-[#173f3b] cursor-pointer w-full h-[40px] rounded-xl flex items-center justify-center text-white font-medium">Next</button>
               <div className="w-full flex justify-center gap-1">
                 <div className="text-gray-900 text-sm">Already have an account?</div>
-                <a href="/signIn" className="text-sm text-[#4592fe] hover:underline">Sign in</a>
+                <a href="/sign-in" className="text-sm text-[#4592fe] hover:underline">Sign in</a>
               </div>
             </div>
           </div>

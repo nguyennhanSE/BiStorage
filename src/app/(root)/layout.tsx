@@ -1,6 +1,6 @@
 import Sidebar from "@/components/sidebar/Sidebar";
 import React from "react";
-
+import "./adjust.css";
 export default function Layout({children}:{children : React.ReactNode}) {
   return (
     <section className="w-full h-full min-h-screen">

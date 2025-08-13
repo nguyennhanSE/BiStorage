@@ -4,7 +4,7 @@ import Image from 'next/image'
 import './adjust.css'
 import Link from 'next/link'
 import { CircleCheck, CircleCheckBig, Play } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 //Third section
 import { TbBoom } from "react-icons/tb"; 
@@ -28,8 +28,11 @@ const Page = () => {
             videoRef.current.play();
         }
     };
+    useEffect(()=>{
+        document.body.classList.add('custom-scrollbar');
+    },[])
 return(
-    <section className="w-full min-h-screen">
+    <section className="w-full min-h-screen custom-scrollbar">
         {/* First section */}
         <div className="w-full flex">
             <div className='background w-full flex flex-col'>
