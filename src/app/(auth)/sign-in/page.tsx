@@ -1,21 +1,15 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import "./adjust.css"
+import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import {
-  SiDiscord,
-  SiMailchimp,
-  SiGrammarly,
-  SiIntercom,
-  SiSquare,
-  SiDropbox,
-} from 'react-icons/si'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { MdOutlineMail } from "react-icons/md";
 import { TbLockPassword } from "react-icons/tb";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useAuthHook } from '@/hooks/AuthHook'
+import { SignInSlider } from "@/components/custom/SignInSlider"
 
 export default function Page() {
   const router = useRouter()
@@ -48,7 +42,15 @@ export default function Page() {
     }
   }, [searchParams, router, authorizeGoogle]);
 
+  // For Load xong hết các ảnh trong slider
+  const [loaded, setLoaded] = useState(false);
+
   return (
+    <>
+    {!loaded && (
+      <div className="w-full h-screen bg-white">
+      </div>
+    )}
     <div className="min-h-screen w-full grid grid-cols-1 lg:grid-cols-2">
       {/* LEFT: form */}
       <div className="flex flex-col px-6 sm:px-10 lg:px-32 pt-5 pb-10 lg:py-10 gap-10 items-center">
@@ -146,61 +148,8 @@ export default function Page() {
       </div>
 
       {/* RIGHT: hero panel */}
-      <div className="relative hidden lg:block overflow-hidden">
-        {/* Solid base color */}
-        <div className="absolute inset-0 bg-[#073D44]" />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(
-                900px 600px at 80% 20%,
-                rgba(255,255,255,0.35) 0%,      
-                rgba(255,255,255,0.25) 10%,     
-                rgba(255,255,255,0.05) 25%,      
-                transparent 40%                 
-              ),
-              radial-gradient(
-                800px 500px at 85% 75%,
-                rgba(26,148,164,0.35),
-                transparent 90%
-              )
-            `,
-          }}
-        />
-
-        <div className="relative h-full flex flex-col justify-center px-14">
-          <h2 className="text-white text-5xl leading-tight font-sans max-w-xl">Revolutionize storage with smarter automation</h2>
-          <div className="mt-8 max-w-xl text-white/90">
-            <div className="text-5xl leading-none">“</div>
-            <p className="-mt-2 text-lg font-sans">
-              BiStorage has completely transformed our workflow. It&apos;s reliable, efficient, and ensures our releases are always top‑notch.
-            </p>
-            <div className="mt-6 flex items-center gap-3">
-              <div className="h-9 w-9 rounded-full bg-white/30" />
-              <div className="text-sm text-white/80">
-                <div className="font-medium text-white">Michael Carter</div>
-                <div className="">Software Engineer at DevCore</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Logos */}
-          <div className="absolute bottom-8 left-14 right-14">
-            <div className="text-xs uppercase tracking-widest text-white/60 mb-4">Join 1k teams</div>
-            <div className="grid grid-cols-4 gap-6 text-white/70 text-sm">
-              <div className="flex items-center gap-2"><SiDiscord className="text-lg" /><span className="hidden xl:inline">Discord</span></div>
-              <div className="flex items-center gap-2"><SiMailchimp className="text-lg" /><span className="hidden xl:inline">Mailchimp</span></div>
-              <div className="flex items-center gap-2"><SiGrammarly className="text-lg" /><span className="hidden xl:inline">Grammarly</span></div>
-              <div className="flex items-center gap-2"><SiIntercom className="text-lg" /><span className="hidden xl:inline">Intercom</span></div>
-              <div className="flex items-center gap-2"><SiSquare className="text-lg" /><span className="hidden xl:inline">Square</span></div>
-              <div className="flex items-center gap-2"><SiDropbox className="text-lg" /><span className="hidden xl:inline">Dropbox</span></div>
-              {/* placeholder to balance grid */}
-              <div />
-            </div>
-          </div>
-        </div>
-      </div>
+      <SignInSlider loaded = {loaded} setLoaded={setLoaded}></SignInSlider>
     </div>
+    </>
   )
 }

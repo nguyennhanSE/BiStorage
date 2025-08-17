@@ -1,9 +1,10 @@
-import { LoginExpired } from "@/components/common/LoginExpired"
-
+import { SignInSlider } from "@/components/custom/SignInSlider"
 const Page = () => {
     return (
-        <div>
-            <LoginExpired />   
+        <div className="w-full h-screen">
+            <div className="w-[50%] h-screen">
+                <SignInSlider></SignInSlider>
+            </div> 
         </div>
     )
 }

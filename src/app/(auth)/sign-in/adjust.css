@@ -1,10 +1,25 @@
 .mary-blue {
     background-color: #457B9D;
   }
-.background-auth {
-  background: linear-gradient(120deg, #7DAFAF, #2C3E50);
+.bg-custom {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      900px 600px at 80% 20%,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.25) 10%,
+      rgba(255, 255, 255, 0.05) 25%,
+      transparent 40%
+    ),
+    radial-gradient(
+      800px 500px at 85% 75%,
+      rgba(26, 148, 164, 0.35),
+      transparent 90%
+    );
 }
+
 .font{
   font-family: "Trebuchet MS", sans-serif;
-font-style: italic;
+  font-style: italic;
 }
+
