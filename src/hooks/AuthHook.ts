@@ -4,7 +4,6 @@ import { axiosInstance } from '@/lib/axios'
 import axios from 'axios';
 export function useAuthHook() {
     const { service1Axios } = axiosInstance();
-
     const signIn = async (email: string, password: string) => {
         try {
             const response = await service1Axios.post('/auth/signin', {

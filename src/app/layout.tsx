@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import { GlobalLoader } from "@/components/common/GlobalLoader";
 import { AOSInitClient } from "@/components/common/AosInitClient";
+import { LoginExpired } from "@/components/common/LoginExpired";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
         {children}
         <Toaster richColors position="bottom-right"/>
         <GlobalLoader></GlobalLoader>
+        <LoginExpired></LoginExpired>
       </body>
     </html>
   );

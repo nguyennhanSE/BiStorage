@@ -1,9 +1,9 @@
-import { AdjustPermissionOverall } from "@/components/permission/AdjustPermissionOverall"
+import { LoginExpired } from "@/components/common/LoginExpired"
 
 const Page = () => {
     return (
         <div>
-            <AdjustPermissionOverall></AdjustPermissionOverall>
+            <LoginExpired />   
         </div>
     )
 }
