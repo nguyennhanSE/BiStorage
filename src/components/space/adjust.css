@@ -1,0 +1,38 @@
+.color-1 {
+  background: linear-gradient(135deg, #3b82f6, #2563eb); /* xanh dương */
+}
+
+.color-2 {
+  background: linear-gradient(135deg, #a855f7, #7e22ce); /* tím hồng */
+}
+
+.color-3 {
+  background: linear-gradient(135deg, #c084fc, #a78bfa); /* tím nhạt */
+}
+
+.color-4 {
+  background: linear-gradient(135deg, #facc15, #f97316); /* vàng cam */
+}
+
+.color-5 {
+  background: linear-gradient(135deg, #fb923c, #ef4444); /* đỏ cam */
+}
+
+.line-segment {
+  height: 100%;
+  flex-shrink: 0;
+  /* nhận biến --w từ inline style nhưng vẫn là class */
+  width: var(--w, 0%);
+}
+
+.arc-track,
+.arc-progress {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dasharray 600ms ease;
+}
+
+.arc-progress {
+  /* mượt hơn khi update used */
+  will-change: stroke-dasharray;
+}

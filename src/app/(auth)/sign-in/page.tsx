@@ -95,9 +95,8 @@ export default function Page() {
 
             {/* Password */}
             <div>
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center mb-2">
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-                <button type="button" className="text-sm text-[#073D44] hover:underline">Forgot Password?</button>
               </div>
               <div className="relative">
                 <input
@@ -113,7 +112,12 @@ export default function Page() {
                   aria-hidden="true"
                 />
               </div>
+              <div className="flex justify-end pt-2">
+                {/* Forgot Password */}
+                <button type="button" className="text-sm text-[#073D44] hover:underline">Forgot Password?</button>
+              </div>
             </div>
+
 
             {/* Submit */}
             <button

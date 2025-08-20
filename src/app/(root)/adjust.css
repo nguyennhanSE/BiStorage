@@ -8,3 +8,24 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 } 
+
+.modal-overlay-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content-menu {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 80%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+

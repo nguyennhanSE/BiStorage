@@ -31,7 +31,7 @@ const HalfCircleGauge = ({ value = 74.7, max = 120 }) => {
       {/* Gạch ngang và Text dưới */}
       <div className="absolute top-[78px] left-0 bottom-0 w-full flex justify-center items-center flex-col">
         <div className="absolute w-full h-[2px] bg-black mt-1" />
-        <div className="absolute z-50 text-xs bg-black text-white px-2 py-[1px] rounded-full mt-1">
+        <div className="absolute z-5 text-xs bg-black text-white px-2 py-[1px] rounded-full mt-1">
           of {max} gb
         </div>
       </div>

@@ -75,7 +75,7 @@ return(
                                     <span className='text-3xl font-normal text-[#3a2f2b] w-[50%] mt-3 ml-4'>Unique design & extensions</span>
                                     <div className='z-50 border border-[#3a2f2b] rounded-xl flex justify-center items-center w-[50%]'>
                                         {!isPlaying && 
-                                        <button onClick={handlePlay} className='absolute z-10 w-[35px] h-[35px] bg-[#8C6D5D] flex justify-center items-center rounded-full cursor-pointer'>
+                                        <button title='Play Video' onClick={handlePlay} className='absolute z-10 w-[35px] h-[35px] bg-[#8C6D5D] flex justify-center items-center rounded-full cursor-pointer'>
                                             <Play size={20} className='text-white'></Play>
                                         </button>}
                                         <video ref={videoRef} src='/landingPage/background.mp4' className={`w-full h-full object-cover rounded-xl ${isPlaying ? 'opacity-100' : 'opacity-0'} `} controls={false} onEnded={() => setIsPlaying(false)}></video>
@@ -363,13 +363,13 @@ return(
                         <span className='text-white text-3xl font-serif'>BiBox</span>
                     </div>
                     <div className='flex gap-4'>
-                        <button className='w-[30px] h-[30px] flex items-center justify-center rounded-full bg-gray-500'>
+                        <button title='LinkedIn' className='w-[30px] h-[30px] flex items-center justify-center rounded-full bg-gray-500'>
                             <FaLinkedinIn size={16} className='text-white'></FaLinkedinIn>
                         </button>
-                        <button className='w-[30px] h-[30px] flex items-center justify-center rounded-full bg-gray-500'>
+                        <button title='Facebook' className='w-[30px] h-[30px] flex items-center justify-center rounded-full bg-gray-500'>
                             <FaFacebookF size={16} className='text-white'></FaFacebookF>
                         </button>
-                        <button className='w-[30px] h-[30px] flex items-center justify-center rounded-full bg-gray-500'>
+                        <button title='GitHub' className='w-[30px] h-[30px] flex items-center justify-center rounded-full bg-gray-500'>
                             <LuGithub size={16} className='text-white'></LuGithub>
                         </button>
                     </div>

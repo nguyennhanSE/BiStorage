@@ -8,7 +8,7 @@ const Space = () => {
             <div className="w-full flex justify-between h-[50px] items-center">
                 <h3 className="text-lg font-semibold">Space</h3>
                 <div className="h-full flex justify-center items-center">
-                    <button className="p-1 bg-gray-100 rounded-lg">
+                    <button className="p-1 bg-gray-100 rounded-lg" aria-label="More options">
                         <Ellipsis size={15} />
                     </button>
                 </div>

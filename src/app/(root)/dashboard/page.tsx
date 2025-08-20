@@ -2,7 +2,7 @@
 
 import AllFiles from "@/components/allFiles/AllFiles";
 import Header from "@/components/common/Header";
-import Space from "@/components/space/Space";
+// import Space from "@/components/space/Space";
 import Storage from "@/components/storage/Storage";
 import { useBreadCrumbStore } from "@/stores/BreadCrumbStore";
 import { useEffect } from "react";
@@ -28,20 +28,21 @@ const Page = () => {
                 {/* All Files and Space */}
                 <div className="w-full flex pt-5 gap-1 min-h-[400px]">
                     {/* All FIles */}
-                    <div className="w-[70%] h-full">
-                    <AllFiles></AllFiles>
+                    <div className="w-full h-full pr-16">
+                        <AllFiles></AllFiles>
                     </div>
-                    <div className="w-[5%] flex justify-center">
+                    {/* <div className="w-[5%] flex justify-center">
                         <div className="w-[2px] bg-black">
                         </div>
-                    </div>
+                    </div> */}
                     {/* Space */}
-                    <div className="w-[20%] px-3 h-full">
+                    {/* <div className="w-[20%] px-3 h-full">
                         <Space></Space>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>
     )
 }
 export default Page
+

@@ -155,3 +155,22 @@
   width: 60%;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
+
+/* For DropDownMenuHeader */
+.dropdown {
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform 180ms ease, opacity 180ms ease;
+  will-change: transform, opacity;
+}
+
+.dropdown--open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dropdown--closed {
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+}

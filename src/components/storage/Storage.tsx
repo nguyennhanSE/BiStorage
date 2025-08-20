@@ -10,7 +10,7 @@ const Storage = () => {
     const router = useRouter();
     const {setLoading} = useLoadingStore();
     return (
-        <section className="w-full h-full flex flex-col gap-3">
+        <section className="w-full h-full flex flex-col gap-3 pr-16">
             <h2 className="text-lg font-semibold">
                 Storage
             </h2>
