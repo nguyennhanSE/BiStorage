@@ -26,17 +26,25 @@ import PricingSwitcher from "@/components/space/PricingSwitcher";
 import LineBar, { FilePercentage } from "@/components/space/LineBar";
 import CircleBar from "@/components/space/CircleBar";
 const ChoiceMenu = ({showChoiceMenu,setShowChoiceMenu} : {showChoiceMenu : boolean,setShowChoiceMenu : (show : boolean) => void}) => {
-    return (
-        <section className="fixed bottom-5 right-5 z-[101] flex flex-col gap-5">
-            <div onClick={() => setShowChoiceMenu(!showChoiceMenu)} className="p-2 rounded-full flex items-center justify-center bg-white shadow-inner shadow-gray-400 hover:shadow-xl hover:-translate-y-1 active:scale-95 transition cursor-pointer">
-                <BsMemory size={20} />
-            </div>
-            <div className="p-2 rounded-full flex items-center justify-center bg-white shadow-inner shadow-gray-400 hover:shadow-xl hover:-translate-y-1 active:scale-95 transition cursor-pointer">
-                <RiWechatChannelsLine size={20} />
-            </div>
-        </section>
-
-    )
+  const [showChat,setShowChat] = React.useState(false);
+  return (
+    <>
+      <section className="fixed bottom-5 right-5 z-[101] flex flex-col gap-5">
+          <div
+          onClick={() => {
+            setShowChat(false);
+            setShowChoiceMenu(!showChoiceMenu);
+          }}  
+          className="p-2 rounded-full flex items-center justify-center bg-white shadow-inner shadow-gray-400 hover:shadow-xl hover:-translate-y-1 active:scale-95 transition cursor-pointer">
+              <BsMemory size={20} />
+          </div>
+          <div onClick={() => setShowChat(!showChat)} className="p-2 rounded-full flex items-center justify-center bg-white shadow-inner shadow-gray-400 hover:shadow-xl hover:-translate-y-1 active:scale-95 transition cursor-pointer">
+              <RiWechatChannelsLine size={20}  />
+          </div>
+      </section>
+      <ChatPanel open={showChat} onClose={() => setShowChat(false)} />
+    </>
+  )
 }
 
 import { IoDocumentText } from "react-icons/io5";
@@ -44,6 +52,8 @@ import { FaRegImage } from "react-icons/fa6";
 import { RiFolderVideoFill } from "react-icons/ri";
 import { MdOutlineAudioFile } from "react-icons/md";
 import { FaFileZipper } from "react-icons/fa6";
+import ChatPanel from "@/components/MiniChatBox/ChatPanel";
+
 const SpaceMenu = () => {
   const [activePrice,setActivePrice] = React.useState(false);
   // temp data
