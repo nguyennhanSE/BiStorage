@@ -6,8 +6,10 @@ import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { TbWorld } from "react-icons/tb";
 import { FiExternalLink, FiChevronRight } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 // import { RxAvatar } from "react-icons/rx";
 const Header = () => {
+
     const [isOpen, setIsOpen] = useState(false);
     return(
         <div className="w-full flex h-[50px] justify-between">
@@ -27,6 +29,7 @@ const Header = () => {
 }
 
 const DropDownMenuHeader = ({isOpen} : {isOpen: boolean}) => {
+  const router = useRouter();
   return (
     <div aria-label="User menu"
     onClick={(e) => e.stopPropagation()}
@@ -72,8 +75,8 @@ const DropDownMenuHeader = ({isOpen} : {isOpen: boolean}) => {
           Settings
         </button>
 
-        <button
-          className="w-full text-left px-3 py-2 rounded-md hover:bg-gray-100"
+        <button onClick={() => router.push('/account')}
+          className="w-full text-left px-3 py-2 rounded-md hover:bg-gray-100 cursor-pointer"
           type="button"
         >
           Manage account

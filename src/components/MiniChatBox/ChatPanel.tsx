@@ -43,7 +43,7 @@ export default function ChatPanel({
             <div className="h-7 w-7 rounded-full bg-violet-600 text-white grid place-items-center text-xs">
               AI
             </div>
-            <span className="font-semibold">BiChat</span>
+            <span className="font-semibold">BiChatBox</span>
           </div>
           <button
             onClick={onClose}

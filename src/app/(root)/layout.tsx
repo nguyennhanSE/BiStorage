@@ -75,7 +75,7 @@ const SpaceMenu = ({setShowSpaceMenu} : {setShowSpaceMenu : (show : boolean) => 
   }, [setShowSpaceMenu]);
   return(
     <div onClick={() => setShowSpaceMenu(false)} className="modal-overlay-menu">
-      <div className="modal-content-menu flex gap-4">
+      <div className="modal-content-menu flex gap-4" onClick={(e) => e.stopPropagation()}>
         <div className="flex flex-col w-[60%] gap-3">
           {/* Upgrade */}
           <div className="w-full border p-5 flex flex-col gap-3 rounded-md bg-[#272525]">
