@@ -4,7 +4,7 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import React from "react";
 import "./adjust.css";
 export default function Layout({children}:{children : React.ReactNode}) {
-  const [showChoiceMenu, setShowChoiceMenu] = React.useState(false);
+  const [showSpaceMenu, setShowSpaceMenu] = React.useState(false);
   return (
     <section className="w-full h-full min-h-screen">
       <div className="fixed top-0 left-0 h-screen w-[18%] bg-[#f9f8f5] z-50">
@@ -14,8 +14,8 @@ export default function Layout({children}:{children : React.ReactNode}) {
       <div className="ml-[18%] w-[82%]">
         {children}
       </div>
-      <ChoiceMenu showChoiceMenu={showChoiceMenu} setShowChoiceMenu={setShowChoiceMenu} />
-      {showChoiceMenu && <SpaceMenu />}
+      <ChoiceMenu showSpaceMenu={showSpaceMenu} setShowSpaceMenu={setShowSpaceMenu} />
+      {showSpaceMenu && <SpaceMenu setShowSpaceMenu={setShowSpaceMenu} />}
     </section>
   );
 }
@@ -25,7 +25,7 @@ import { RiWechatChannelsLine } from "react-icons/ri";
 import PricingSwitcher from "@/components/space/PricingSwitcher";
 import LineBar, { FilePercentage } from "@/components/space/LineBar";
 import CircleBar from "@/components/space/CircleBar";
-const ChoiceMenu = ({showChoiceMenu,setShowChoiceMenu} : {showChoiceMenu : boolean,setShowChoiceMenu : (show : boolean) => void}) => {
+const ChoiceMenu = ({showSpaceMenu,setShowSpaceMenu} : {showSpaceMenu : boolean,setShowSpaceMenu : (show : boolean) => void}) => {
   const [showChat,setShowChat] = React.useState(false);
   return (
     <>
@@ -33,7 +33,7 @@ const ChoiceMenu = ({showChoiceMenu,setShowChoiceMenu} : {showChoiceMenu : boole
           <div
           onClick={() => {
             setShowChat(false);
-            setShowChoiceMenu(!showChoiceMenu);
+            setShowSpaceMenu(!showSpaceMenu);
           }}  
           className="p-2 rounded-full flex items-center justify-center bg-white shadow-inner shadow-gray-400 hover:shadow-xl hover:-translate-y-1 active:scale-95 transition cursor-pointer">
               <BsMemory size={20} />
@@ -54,7 +54,7 @@ import { MdOutlineAudioFile } from "react-icons/md";
 import { FaFileZipper } from "react-icons/fa6";
 import ChatPanel from "@/components/MiniChatBox/ChatPanel";
 
-const SpaceMenu = () => {
+const SpaceMenu = ({setShowSpaceMenu} : {setShowSpaceMenu : (show : boolean) => void}) => {
   const [activePrice,setActivePrice] = React.useState(false);
   // temp data
 
@@ -66,8 +66,15 @@ const SpaceMenu = () => {
     audio: 5,
     zip : 8
   };
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowSpaceMenu(false);
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [setShowSpaceMenu]);
   return(
-    <div className="modal-overlay-menu">
+    <div onClick={() => setShowSpaceMenu(false)} className="modal-overlay-menu">
       <div className="modal-content-menu flex gap-4">
         <div className="flex flex-col w-[60%] gap-3">
           {/* Upgrade */}
