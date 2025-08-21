@@ -34,4 +34,8 @@ export const dataInSpace = [
     {name : 'Other', icon : GiMeepleCircle}
 ]
 
+export const generalInStatisticsSidebar = [
+    { name: 'Dashboard', icon: GoHome, path: '/dashboard' },
+    { name: 'Statistics', icon: BsFillClipboardDataFill, path: '/statistics' },
+];
 

@@ -2,9 +2,11 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FiEdit2 } from "react-icons/fi";
+import { IoCheckmarkDone } from "react-icons/io5";
+
 const sidebarNavItems = [
     "My Profile", "Package Used", "Notifications"
 ];
@@ -23,7 +25,6 @@ const Page = () => {
         const target = sectionRefs[item]?.current;
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
-
     return (
         <section className='w-full min-h-screen bg-gray-50 py-8 px-10'>
             {/* Header */}
@@ -77,16 +78,34 @@ const Page = () => {
 };
 
 const MyProfileContent = () => {
+    const [edit1,setEdit1] = useState(false);
+    const [edit2,setEdit2] = useState(false);
+    const [edit3,setEdit3] = useState(false);
+
+    const [firstName, setFirstName] = useState("Nhan");
+    const [lastName, setLastName] = useState("Nguyen");
+    const [email, setEmail] = useState("nguyennhan5665@gmail.com");
+    const [bio, setBio] = useState("Team's Frontend Developer");
+    const [phone,setPhone] = useState("0948371235");
+
+    const [country, setCountry] = useState("United Kingdom");
+    const [city, setCity] = useState("Leeds");
+    const [postalCode, setPostalCode] = useState("ERT 2354");
+    const [taxId, setTaxId] = useState("AS45645756");
+    const fullName = `${firstName} ${lastName}`;
     return (
         <div className='flex flex-col gap-8 p-8'>
             <h1 className='text-2xl font-bold text-gray-800'>My Profile</h1>
             <div className='border border-gray-200 rounded-xl p-6'>
                 <header className='flex justify-between items-center mb-6'>
                     <div></div>
-                    <button className='flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors'>
+                    {!edit1 ? <button onClick={() => setEdit1(true)} className='flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer'>
                         <FiEdit2 size={14} />
                         Edit
-                    </button>
+                    </button> : <button onClick={() => setEdit1(false)} className='flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer'>
+                        <IoCheckmarkDone size={14} />
+                        Save
+                    </button>}
                 </header>
                 <div className='flex items-center gap-5'>
                     <Image
@@ -97,9 +116,8 @@ const MyProfileContent = () => {
                         className='w-20 h-20 rounded-full object-cover'
                     />
                     <div>
-                        <h2 className='text-xl font-semibold text-gray-900'>Nguyen Nhan</h2>
-                        {/* <p className='text-gray-500'>Team Manager</p> */}
-                        <p className='text-gray-500'>Leeds, United Kingdom</p>
+                        <h2 className='text-xl font-semibold text-gray-900'>{fullName}</h2>
+                        <p className='text-gray-500'>{city}, {country}</p>
                     </div>
                 </div>
             </div>
@@ -108,36 +126,49 @@ const MyProfileContent = () => {
             <div className='border border-gray-200 rounded-xl p-6'>
                 <header className='flex justify-between items-center mb-6'>
                     <h3 className='text-lg font-semibold text-gray-800'>Personal Information</h3>
-                    <button className='flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors'>
+                    {!edit2 ? <button onClick={() => setEdit2(true)} className='flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer'>
                         <FiEdit2 size={14} />
                         Edit
-                    </button>
+                    </button> : <button onClick={() => setEdit2(false)} className='flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer'>
+                        <IoCheckmarkDone size={14} />
+                        Save
+                    </button>}
                 </header>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6'>
                     {/* First Name */}
                     <div>
                         <p className='text-sm text-gray-500 mb-1'>First Name</p>
-                        <p className='text-base font-medium text-gray-800'>Nhan</p>
+                        <input aria-label='First Name' type='text' onChange={(e) => setFirstName(e.target.value)} readOnly = {!edit2}  
+                        style={{ width: `${firstName.length + 5}ch`, minWidth: "120px" }}
+                        className={`px-2 py-1 rounded-md -ml-2 text-base font-medium text-gray-800 ${edit2 ? 'bg-white border border-gray-300 focus:border-teal-500 focus:outline-none' : 'cursor-default select-none pointer-events-none border border-transparent'}`} value={firstName} />
                     </div>
                     {/* Last Name */}
                     <div>
                         <p className='text-sm text-gray-500 mb-1'>Last Name</p>
-                        <p className='text-base font-medium text-gray-800'>Nguyen</p>
+                        <input aria-label='Last Name' type='text' onChange={(e) => setLastName(e.target.value)} readOnly = {!edit2}
+                        style={{ width: `${lastName.length + 5}ch`, minWidth: "120px" }}
+                        className={`px-2 py-1 rounded-md -ml-2 text-base font-medium text-gray-800 ${edit2 ? 'bg-white border border-gray-300 focus:border-teal-500 focus:outline-none' : 'cursor-default select-none pointer-events-none border border-transparent'}`} value={lastName} />
                     </div>
                     {/* Email */}
                     <div>
                         <p className='text-sm text-gray-500 mb-1'>Email address</p>
-                        <p className='text-base font-medium text-gray-800'>nguyennhan5665@gmail.com</p>
+                        <input aria-label='Email Address' type='text' onChange={(e) => setEmail(e.target.value)} readOnly = {!edit2}  
+                        style={{ width: `${email.length + 5}ch`, minWidth: "120px" }}
+                        className={`px-2 py-1 rounded-md -ml-2 text-base font-medium text-gray-800 ${edit2 ? 'bg-white border border-gray-300 focus:border-teal-500 focus:outline-none' : 'cursor-default select-none pointer-events-none border border-transparent'}`} value={email} />
                     </div>
                     {/* Phone */}
                     <div>
                         <p className='text-sm text-gray-500 mb-1'>Phone</p>
-                        <p className='text-base font-medium text-gray-800'>+09 48 37 1235</p>
+                        <input aria-label='Phone' type='text' onChange={(e) => setPhone(e.target.value)} readOnly = {!edit2} 
+                        style={{ width: `${phone.length + 5}ch`, minWidth: "120px" }} 
+                        className={`px-2 py-1 rounded-md -ml-2 text-base font-medium text-gray-800 ${edit2 ? 'bg-white border border-gray-300 focus:border-teal-500 focus:outline-none' : 'cursor-default select-none pointer-events-none border border-transparent'}`} value={phone} />
                     </div>
                     {/* Bio */}
                     <div className='md:col-span-2'>
                         <p className='text-sm text-gray-500 mb-1'>Bio</p>
-                        <p className='text-base font-medium text-gray-800'>Team&apos;s Frontend Developer</p>
+                        <input aria-label='Bio' type='text' onChange={(e) => setBio(e.target.value)} readOnly = {!edit2} 
+                        style={{ width: `${bio.length + 5}ch`, minWidth: "120px" }}
+                        className={`px-2 py-1 rounded-md -ml-2 text-base font-medium text-gray-800 ${edit2 ? 'bg-white border border-gray-300 focus:border-teal-500 focus:outline-none' : 'cursor-default select-none pointer-events-none border border-transparent'}`} value={bio} />
                     </div>
                 </div>
             </div>
@@ -146,31 +177,42 @@ const MyProfileContent = () => {
             <div className='border border-gray-200 rounded-xl p-6'>
                 <header className='flex justify-between items-center mb-6'>
                     <h3 className='text-lg font-semibold text-gray-800'>Address</h3>
-                    <button className='flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors'>
+                    {!edit3 ? <button onClick={() => setEdit3(true)} className='flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer'>
                         <FiEdit2 size={14} />
                         Edit
-                    </button>
+                    </button> : <button onClick={() => setEdit3(false)} className='flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer'>
+                        <IoCheckmarkDone size={14} />
+                        Save
+                    </button>}
                 </header>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6'>
                     {/* Country */}
                     <div>
                         <p className='text-sm text-gray-500 mb-1'>Country</p>
-                        <p className='text-base font-medium text-gray-800'>United Kingdom</p>
+                        <input aria-label='Country' type='text' onChange={(e) => setCountry(e.target.value)} readOnly = {!edit3} 
+                        style={{ width: `${country.length + 5}ch`, minWidth: "120px" }}
+                        className={`px-2 py-1 rounded-md -ml-2 text-base font-medium text-gray-800 ${edit3 ? 'bg-white border border-gray-300 focus:border-teal-500 focus:outline-none' : 'cursor-default select-none pointer-events-none border border-transparent'}`} value={country} />
                     </div>
                     {/* City/State */}
                     <div>
                         <p className='text-sm text-gray-500 mb-1'>City/State</p>
-                        <p className='text-base font-medium text-gray-800'>Leeds, East London</p>
+                        <input aria-label='City/State' type='text' onChange={(e) => setCity(e.target.value)} readOnly = {!edit3} 
+                        style={{ width: `${city.length + 5}ch`, minWidth: "120px" }} 
+                        className={`px-2 py-1 rounded-md -ml-2 text-base font-medium text-gray-800 ${edit3 ? 'bg-white border border-gray-300 focus:border-teal-500 focus:outline-none' : 'cursor-default select-none pointer-events-none border border-transparent'}`} value={city} />
                     </div>
                     {/* Postal Code */}
                     <div>
                         <p className='text-sm text-gray-500 mb-1'>Postal Code</p>
-                        <p className='text-base font-medium text-gray-800'>ERT 2354</p>
+                        <input aria-label='Postal Code' type='text' onChange={(e) => setPostalCode(e.target.value)} readOnly = {!edit3}
+                        style={{ width: `${postalCode.length + 5}ch`, minWidth: "120px" }}
+                        className={`px-2 py-1 rounded-md -ml-2 text-base font-medium text-gray-800 ${edit3 ? 'bg-white border border-gray-300 focus:border-teal-500 focus:outline-none' : 'cursor-default select-none pointer-events-none border border-transparent'}`} value={postalCode} />
                     </div>
                     {/* TAX ID */}
                     <div>
                         <p className='text-sm text-gray-500 mb-1'>TAX ID</p>
-                        <p className='text-base font-medium text-gray-800'>AS45645756</p>
+                        <input aria-label='TAX ID' type='text' onChange={(e) => setTaxId(e.target.value)} readOnly = {!edit3}
+                        style={{ width: `${taxId.length + 5}ch`, minWidth: "120px" }}
+                        className={`px-2 py-1 rounded-md -ml-2 text-base font-medium text-gray-800 ${edit3 ? 'bg-white border border-gray-300 focus:border-teal-500 focus:outline-none' : 'cursor-default select-none pointer-events-none border border-transparent'}`} value={taxId} />
                     </div>
                 </div>
             </div>

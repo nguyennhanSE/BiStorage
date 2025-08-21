@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { GlobalLoader } from "@/components/common/GlobalLoader";
 import { AOSInitClient } from "@/components/common/AosInitClient";
 import { LoginExpired } from "@/components/common/LoginExpired";
+// import PageTransition from "@/components/common/PageTransition";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,10 +32,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AOSInitClient></AOSInitClient>
-        {children}
         <Toaster richColors position="bottom-right"/>
+        {/* <PageTransition /> */}
         <GlobalLoader></GlobalLoader>
         <LoginExpired></LoginExpired>
+        {children}
       </body>
     </html>
   );

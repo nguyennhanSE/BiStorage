@@ -35,13 +35,13 @@ const AllFiles = () => {
                 <h3 className="text-lg font-semibold">All Files</h3>
                 <div className="h-full flex gap-1">
                     <div className="flex justify-center items-center">
-                        <button title="Table View" onClick={()=>handleTabChange(true)} className={`p-2 rounded-lg cursor-pointer ${tableTab ? 'bg-black ' : 'bg-gray-100'} `}>
-                            <LuPanelTop size={15} className={`${tableTab? 'text-white' : 'text-black'}`}></LuPanelTop>
+                        <button title="Table View" onClick={()=>handleTabChange(true)} className={`p-2 rounded-lg cursor-pointer ${tableTab ? 'bg-black text-white ' : 'bg-gray-100 text-black'} `}>
+                            <LuPanelTop size={15} color={tableTab ? '#fff' : '#000'} />
                         </button>
                     </div>
                     <div className="flex justify-center items-center">
-                        <button title="Grid View" onClick={()=>handleTabChange(false)} className={`p-2 rounded-lg cursor-pointer ${!tableTab ? 'bg-black ' : 'bg-gray-100'} `}>
-                            <LuLayoutGrid size={15} className={`${!tableTab? 'text-white' : 'text-black'}`}></LuLayoutGrid>
+                        <button title="Grid View" onClick={()=>handleTabChange(false)} className={`p-2 rounded-lg cursor-pointer ${!tableTab ? 'bg-black text-white' : 'bg-gray-100 text-black'}`}>
+                            <LuLayoutGrid size={15} color={!tableTab ? '#fff' : '#000'} />
                         </button>
                     </div>
                 </div>
