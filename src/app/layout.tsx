@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Roboto_Condensed,Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { GlobalLoader } from "@/components/common/GlobalLoader";
@@ -16,6 +16,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const robotoCondensed = Roboto_Condensed({
+  variable: "--font-roboto-condensed",
+  weight: ["400","500","600","700","800","900"],
+  subsets: ["latin"],
+});
+
+const dancingScript = Dancing_Script({
+  variable: "--font-dancing-script",
+  weight: ["400","500","600","700"],
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "BiStorage",
   description: "The only file storage platform that you need",
@@ -29,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${dancingScript.variable} ${robotoCondensed.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AOSInitClient></AOSInitClient>
         <Toaster richColors position="bottom-right"/>

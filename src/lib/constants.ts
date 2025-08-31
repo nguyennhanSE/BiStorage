@@ -20,10 +20,10 @@ export const generalInSidebar = [
 ];
 
 export const filesInSidebar = [
-    {name : 'Storage', icon : MdOutlineSdStorage},
-    {name : 'Shared', icon : RiFolderSharedLine},
-    {name : 'Recent', icon : IoTimerOutline},
-    {name : 'Deleted', icon : RiDeleteBin7Line},
+    {name : 'Storage', icon : MdOutlineSdStorage,path : '/storage'},
+    {name : 'Shared', icon : RiFolderSharedLine,path : '/shared'},
+    {name : 'Recent', icon : IoTimerOutline,path : '/recent'},
+    {name : 'Deleted', icon : RiDeleteBin7Line,path : '/deleted'},
 ]
 
 export const dataInSpace = [

@@ -31,8 +31,10 @@ export function usePermissionHook (){
             await service1Axios.post(`/files/${fileId}/permissions/add`,{
                 permissions : [
                     {
-                        "permission_type" : permissionType,
-                        "user_id" : userId
+                        "expire_at": 0,
+                        "fileId": fileId,
+                        "permission_type": permissionType,
+                        "user_id": userId
                     }
                 ]
             });

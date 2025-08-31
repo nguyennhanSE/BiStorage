@@ -67,7 +67,7 @@ const Sidebar = () => {
                     <div key='files' className="w-full flex flex-col gap-2">
                         <span className="text-sm text-gray-500 px-2 font-semibold">Files</span>
                         {filesInSidebar.map((x,index) => (
-                            <div className="w-full flex gap-3 px-4 py-2" key={index}>
+                            <div onClick={() => handleNavigatePage(x.path)} className={`w-full flex gap-3 px-4 py-2 cursor-pointer hover:border hover:rounded-lg hover:bg-[#f0ede6] text-black `} key={index}>
                                 {x.icon && <x.icon size={18} />}
                                 <span className="text-sm font-semibold">{x.name}</span>
                             </div>

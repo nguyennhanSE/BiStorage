@@ -1,7 +1,7 @@
 'use client'
 
 import { useFileStore } from '@/stores/FileStore'
-import { AddFilePayload, FetchFilesParams } from '@/models/Interface'
+import { AddFilePayload, FetchFilesParams, defaultFetchFilesParams } from '@/models/Interface'
 import { axiosInstance } from '@/lib/axios'
 import axios from 'axios'
 import { toast } from 'sonner'
@@ -16,12 +16,16 @@ import { PermissionFileType } from '@/stores/FilePermissionStore'
 
 export function useFileHook() {
     const{setLoading} = useFileStore();
+
     const fetchFiles = async(params : FetchFilesParams) => {
         setLoading(true);
         try {
             const {service1Axios} = axiosInstance();
-            const response = await service1Axios.get('/files/my-drive',{
-                params: params
+            const response = await service1Axios.get('/files/filter/with-permissions',{
+                params: {
+                    ...params,
+                    ...defaultFetchFilesParams
+                } 
             });
             return response.data.data.data;
         }
@@ -39,30 +43,30 @@ export function useFileHook() {
             const {service1Axios} = axiosInstance();
             const response = await service1Axios.post('/files/add',payload);
             const putObjectUrl = response.data.data.put_object_url;
-            const uploadLoadValue = response.data.data.upload_lock_value;
+            // const uploadLoadValue = response.data.data.upload_lock_value;
             try{
                 const res = await axios.put(putObjectUrl,selectedFile,{
                     headers:{
                         "Content-Type": selectedFile.type
                     },
-                    // onUploadProgress: (progressEvent) => {
-                    //     const percentCompleted = Math.round(
-                    //       (progressEvent.loaded * 100) / (progressEvent.total || 1) 
-                    //     );
-                    //     toast.loading(`Uploading ${selectedFile.name}: ${percentCompleted}%`);
-                    // },
+                    onUploadProgress: (progressEvent) => {
+                        const percentCompleted = Math.round(
+                          (progressEvent.loaded * 100) / (progressEvent.total || 1) 
+                        );
+                        toast.loading(`Uploading ${selectedFile.name}: ${percentCompleted}%`);
+                    },
                 });
                 if (res.status === 200){
                     toast.success(`${selectedFile.name} uploaded successfully!`);
-                    try{
-                        await service1Axios.patch(`/files/${response.data.data.id}/uploaded`,{
-                            "upload_lock_value" : uploadLoadValue
-                        })
-                    }
-                    catch{
-                        toast.error('There is errors why uploading file. Please try again.');
-                        return;
-                    }
+                    // try{
+                    //     await service1Axios.patch(`/files/${response.data.data.id}/uploaded`,{
+                    //         "upload_lock_value" : uploadLoadValue
+                    //     })
+                    // }
+                    // catch{
+                    //     toast.error('There is errors why uploading file. Please try again.');
+                    //     return;
+                    // }
                 }
                 else{
                     toast.error('There is errors why uploading file. Please try again.');
@@ -82,12 +86,17 @@ export function useFileHook() {
             setLoading(false);
         }
     };
-    
-    const restoreFile = async(id : string) => {
+
+    const recoverFile = async(id : string, destination_folder_id : string) => {
         try{
             setLoading(true);
             const {service1Axios} = axiosInstance();
-            await service1Axios.patch(`/files/${id}/recover`);
+            await service1Axios.patch(`/files/${id}/recover`, {
+                params : {
+                    "destination_folder_id": destination_folder_id,
+                    "id": id
+                }
+            });
         }
         catch{
             toast.error("There is errors why restoring file. Please try again.");
@@ -198,7 +207,7 @@ export function useFileHook() {
     return {
         fetchFiles,
         addFile,
-        restoreFile,
+        recoverFile,
         softDeleteFile,
         permanentDeleteFile,
         fetchFileById,

@@ -1,18 +1,31 @@
 export interface FileFormat {
-    _id : string,
-    name : string,
-    total_size : number,
-    owner_id : string,
-    is_folder : boolean,
-    parent_folder_id : string,
-    created_at : string,
-    updated_at : string,
-    opened_at : string,
-    description : string,
-    is_deleted : boolean,
-    deleted_at : string,
-    tag_ids : Tag[],
-    storage_detail : FileOnS3
+    "created_at": number,
+    "deleted_at": number,
+    "description": string,
+    "id": string,
+    "is_deleted": boolean,
+    "is_folder": boolean,
+    "name": string,
+    "opened_at": number,
+    "owner_id": string,
+    "parent_folder_id": string,
+    "permissions": [
+        {
+        "email": string,
+        "first_name": string,
+        "last_name": string,
+        "permission_type": number,
+        "user_id": string,
+        "user_image": string
+        }
+    ],
+    "storage_detail": {
+        "file_size": number,
+        "mime_type": string
+    },
+    "tag_ids": string[],
+    "total_size": number,
+    "updated_at": number
 }
 
 export interface Tag {
@@ -81,26 +94,36 @@ export interface FilePermission {
 
 // các interface có body Axios Request:
 export interface AddFilePayload {
-    description: string;
-    has_password: boolean;
-    is_folder: boolean;
-    is_secure: boolean;
-    name: string;
-    parent_folder_id: string;
-    password: string;
-    storage_detail: {
-      mime_type: string;
-      size: string;
-    };
-    tags: string[];
-    upload_lock_value: string;
+    "description": string,
+    "is_folder": true,
+    "name": string,
+    "parent_folder_id": string,
+    "storage_detail": {
+        "size": number
+    },
+    "tag_ids": string[]
 }
 
 export interface FetchFilesParams {
-    is_deleted: boolean;
-    is_folder?: boolean;
-    sort_by: string;
-    is_asc: boolean;
-    offset: number;
-    limit: number;
-  }
+  tag_id?: string | null ;
+  parent_folder_id?: string | null;
+  is_folder?: boolean | null;
+  is_deleted?: boolean | null;
+  mime_type?: string | null;
+  sort: string;               // bắt buộc
+  is_asc?: boolean | null;
+  offset?: number | null;
+  limit?: number | null;
+}
+
+export const defaultFetchFilesParams : FetchFilesParams = {
+  tag_id: null,
+  parent_folder_id: null,
+  is_folder: null,
+  is_deleted: null,
+  mime_type: null,
+  sort: "created_at",
+  is_asc: null,
+  offset: null,
+  limit: null
+}

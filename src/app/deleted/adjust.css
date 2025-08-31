@@ -1,0 +1,23 @@
+.nav-item {
+    font-family: var(--font-roboto-condensed);
+    font-weight: 500;
+    font-size: 20px;
+    position: relative;
+}
+
+.active-nav {
+    height: 3px;
+    border-radius: 1rem;
+    background: #0d9488;
+    transition: width 0.3s ease;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+}
+
+.no-file-span {
+    font-family: var(--font-dancing-script);
+    font-size: 30px;
+    color: #0d9488;
+}
