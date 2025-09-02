@@ -2,7 +2,7 @@
 
 import { LuPanelTop } from "react-icons/lu";
 import { LuLayoutGrid } from 'react-icons/lu';
-import FilesData from "../../../public/data/Files.json";
+// import FilesData from "../../../public/data/Files.json";
 import { ChevronsUpDown} from "lucide-react";
 import { DropDownMenuAllFiles } from "./DropDownMenu";
 import { useEffect, useState } from "react";
@@ -10,9 +10,14 @@ import Image from "next/image";
 import { FaFolder } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
 import BiBoxLoader from "../loader/BiBoxLoader";
+import { useFileStore } from "@/stores/FileStore";
+import { useFileHook } from "@/hooks/FileHook";
+import { FetchFilesParams, FileFormat } from "@/models/Interface";
+import { formatDateFromTimestamp, formatSize } from "@/lib/constants";
 
 const AllFiles = () => {
     const [tableTab, setTableTab] = useState(true);
+    const [files, setFiles] = useState<FileFormat[]>([]);
     //set tạm thời để demo
     const [loading,setLoading] = useState<boolean>();
     const handleTabChange = (isTable : boolean) => {
@@ -27,6 +32,23 @@ const AllFiles = () => {
     } else {
     setLoading(false);}
     }, [loading]);
+    ///////////////
+    const {updating} = useFileStore();
+    const {fetchFiles} = useFileHook();
+    useEffect(() => {
+        const params : FetchFilesParams = {
+            is_folder : false,
+            is_deleted : false,
+            sort : 'updated_at',
+            offset : 0,
+            limit : 10
+        }
+        const handle = async () => {
+            const data = await fetchFiles(params);
+            setFiles(Array.isArray(data) ? data : []); 
+        };
+        handle();
+    },[updating]);
 
     return (
         <section className="w-full h-full flex flex-col overflow-x-hidden">
@@ -83,7 +105,7 @@ const AllFiles = () => {
                 </tr>
                 </thead>
                 <tbody>
-                    {FilesData.data.map((x,index) => (
+                    {files.length > 0 && files.map((x,index) => (
                         <tr key={index} className="text-sm font-semibold text-black border-b h-[50px] hover:bg-[#f7f4eb] group ">
                             <td>
                                 <div className="flex w-full h-full items-center justify-center">
@@ -92,25 +114,26 @@ const AllFiles = () => {
                             </td>
                             <td>
                                 <div className="flex items-center px-2">
-                                    <span>{x.name}.</span>
-                                    <span className="text-gray-300">{x.storage_detail.mime_type}</span>
+                                    {/* <span>{x.name}.</span> */}
+                                    <span>{x.name}</span>
+                                    {/* <span className="text-gray-300">{x.storage_detail.mime_type}</span> */}
                                 </div>
                             </td>
                             <td>
                                 <div className="flex items-center px-2">
                                     <div className="p-1 border rounded-lg">
-                                        <span>{x.tag_ids[0].name}</span>
+                                        <span>{x.tag_ids[0]}</span>
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div className="flex items-center px-2">
-                                    <span>{x.total_size}</span>
+                                    <span>{formatSize(x.total_size)}</span>
                                 </div>
                             </td>
                             <td>
                                 <div className="flex items-center justify-between px-2">
-                                    <span className="ml-1">{x.created_at}</span>
+                                    <span className="ml-1">{formatDateFromTimestamp(x.created_at)}</span>
                                     <DropDownMenuAllFiles file={x} ></DropDownMenuAllFiles>
                                 </div>
                             </td>
@@ -122,7 +145,7 @@ const AllFiles = () => {
             (
             <>
             {!loading && <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 overflow-hidden">
-                {FilesData.data.map((x,index)=>(
+                {files.length > 0 && files.map((x,index)=>(
                     <div key={index} className="relative w-full h-[200px] rounded-2xl border border-gray-200 bg-white overflow-hidden">
                         <div className="absolute top-0 left-0 w-[150px] h-[50px] bg-[#7DAFAF] rounded-br-[40px]"></div>
                         <div className="absolute bottom-0 right-0 w-[250px] h-[40px] bg-[#7DAFAF] rounded-tl-[40px]"></div>
@@ -160,7 +183,7 @@ const AllFiles = () => {
                                 <div className="w-[250px] flex items-center justify-between p-2 px-5">
                                     <div className="flex gap-2">
                                         <span className="opacity-70 text-sm">Created at:</span>
-                                        <span className="opacity-70 text-sm">{x.created_at}</span>   
+                                        <span className="opacity-70 text-sm">{formatDateFromTimestamp(x.created_at)}</span>   
                                     </div>
                                     <DropDownMenuAllFiles file={x} ></DropDownMenuAllFiles>
                                 </div>

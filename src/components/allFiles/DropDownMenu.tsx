@@ -21,6 +21,7 @@ import { FileDetail } from "../common/FileDetail";
 import { PermissionModal } from "../common/PermissionModal";
 import { createPortal } from "react-dom";
 import { AdjustPermissionOverall } from "../permission/AdjustPermissionOverall";
+import { useFileHook } from "@/hooks/FileHook";
 
 export function DropDownMenuAllFiles({file} : {file : FileFormat}) {
   //togge File Detail
@@ -28,6 +29,16 @@ export function DropDownMenuAllFiles({file} : {file : FileFormat}) {
   const [isPermissionOpen, setIsPermissionOpen] = useState(false);
   const [mounted,setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  const {handleDownloadFile,softDeleteFile} = useFileHook();
+  const handleDownload = async() => {
+    const res = await handleDownloadFile(file.id);
+    console.log(res);
+  };
+
+  const handleDelete = async() => {
+    await softDeleteFile(file.id);
+  };
 
   return (
     <DropdownMenu>
@@ -49,14 +60,14 @@ export function DropDownMenuAllFiles({file} : {file : FileFormat}) {
             Manage Permissions
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            Keyboard shortcuts
+          <DropdownMenuItem onClick={() => handleDownload()}>
+            Download File
             <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>Team</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleDelete()}>Delete File</DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
             <DropdownMenuPortal>
@@ -85,7 +96,7 @@ export function DropDownMenuAllFiles({file} : {file : FileFormat}) {
       </DropdownMenuContent>, document.body)}
 
       {/* Extra page */}
-      {mounted && isDetailOpen && createPortal(<FileDetail fileId = {file._id} setIsOpen={setIsDetailOpen}></FileDetail>, document.body)}
+      {mounted && isDetailOpen && createPortal(<FileDetail fileId = {file.id} setIsOpen={setIsDetailOpen}></FileDetail>, document.body)}
       {mounted && isPermissionOpen && createPortal(<PermissionModal file={file} setIsOpen={setIsPermissionOpen}  setUserPermision={() => {}}></PermissionModal>, document.body)}
     </DropdownMenu>
   )
@@ -98,6 +109,15 @@ export function DropDownMenuStorage ({file} : {file : FileFormat}) {
   const [userPermission , setUserPermission] = useState(false);
 
   useEffect(() => setMounted(true), []);
+  const {handleDownloadFile,softDeleteFile} = useFileHook();
+  const handleDownload = async() => {
+    const res = await handleDownloadFile(file.id);
+    console.log(res);
+  };
+
+  const handleDelete = async() => {
+    await softDeleteFile(file.id);
+  };
   return(
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="p-1 hover:bg-[#93c3a1] hover:rounded-md ">
@@ -118,14 +138,14 @@ export function DropDownMenuStorage ({file} : {file : FileFormat}) {
             Manage Permissions
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            Keyboard shortcuts
+          <DropdownMenuItem onClick={() => handleDownload()}>
+            Download Folder
             <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>Team</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleDelete()}>Delete Folder</DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
             <DropdownMenuPortal>
@@ -154,7 +174,7 @@ export function DropDownMenuStorage ({file} : {file : FileFormat}) {
       </DropdownMenuContent>, document.body)}
 
       {/* Extra page */}
-      {mounted && isDetailOpen && createPortal(<FileDetail fileId = {file._id} setIsOpen={setIsDetailOpen}></FileDetail>, document.body)}
+      {mounted && isDetailOpen && createPortal(<FileDetail fileId = {file.id} setIsOpen={setIsDetailOpen}></FileDetail>, document.body)}
       {mounted && isPermissionOpen && createPortal(<PermissionModal file={file} setIsOpen={setIsPermissionOpen} setUserPermision={setUserPermission}></PermissionModal>, document.body)}
       {mounted && userPermission && createPortal(<AdjustPermissionOverall setIsOpen={setUserPermission} setIsOpen2={setIsPermissionOpen}></AdjustPermissionOverall>, document.body)}
     </DropdownMenu>

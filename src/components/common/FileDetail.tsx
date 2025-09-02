@@ -1,6 +1,7 @@
 'use client'
 
 import { useFileHook } from "@/hooks/FileHook";
+import { formatDateFromTimestamp, formatSize } from "@/lib/constants";
 import { FileFormat } from "@/models/Interface";
 import { useEffect,useState } from "react"
 export const FileDetail = ({fileId , setIsOpen} : {fileId :string, setIsOpen: (val : boolean) => void}) => {
@@ -12,7 +13,7 @@ export const FileDetail = ({fileId , setIsOpen} : {fileId :string, setIsOpen: (v
           setFileData(res);
         };
         fetchData();
-      });
+      },[fileId]);
 
     return(
         <div className={`fixed top-0 right-0 h-full bg-white shadow-lg w-96 p-6 z-99 overflow-y-auto text-sm font-sans`}>
@@ -26,7 +27,7 @@ export const FileDetail = ({fileId , setIsOpen} : {fileId :string, setIsOpen: (v
                     </div>
                     <div className="flex-[9] flex flex-col">
                         <div className="border-b border-gray-300 flex flex-col gap-3 pt-5">
-                            <div className="w-full h-[150px] border">{fileData._id}</div>
+                            <div className="w-full h-[150px] border">{fileData.id}</div>
                             <div className="flex flex-col">
                                 <div>Người có quyền truy cập</div>
                                 <div>avatar</div>
@@ -50,11 +51,11 @@ export const FileDetail = ({fileId , setIsOpen} : {fileId :string, setIsOpen: (v
                                 </div>
                                 <div className="flex">
                                     <div className="flex-[4] text-gray-400">Size</div>
-                                    <div className="flex-[6]">{(fileData.storage_detail.size).toFixed(4)}Mb</div>
+                                    <div className="flex-[6]">{formatSize(fileData.total_size)}</div>
                                 </div>
                                 <div className="flex">
                                     <div className="flex-[4] text-gray-400">Modified</div>
-                                    <div className="flex-[6]">{fileData.updated_at.substring(0,10)}</div>
+                                    <div className="flex-[6]">{formatDateFromTimestamp(fileData.updated_at)}</div>
                                 </div>
                                 <div className="flex">
                                     <div className="flex-[4] text-gray-400">Type</div>
@@ -68,7 +69,7 @@ export const FileDetail = ({fileId , setIsOpen} : {fileId :string, setIsOpen: (v
                                 </div>
                                 <div className="flex">
                                     <div className="flex-[4] text-gray-400">Date uploaded</div>
-                                    <div className="flex-[6]">{fileData.created_at.slice(0,10)}</div>
+                                    <div className="flex-[6]">{formatDateFromTimestamp(fileData.created_at)}</div>
                                 </div>
                                 <div className="flex">
                                     <div className="flex-[4] text-gray-400">Description</div>

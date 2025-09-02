@@ -1,33 +1,29 @@
 'use client'
 
 import { useFileStore } from '@/stores/FileStore'
-import { AddFilePayload, FetchFilesParams, defaultFetchFilesParams } from '@/models/Interface'
+import { AddFilePayload, FetchFilesParams} from '@/models/Interface'
 import { axiosInstance } from '@/lib/axios'
-import axios from 'axios'
 import { toast } from 'sonner'
 
 //tạm thời
 import ParentAndChild from "../../public/data/ParentAndChild.json";
 
 //temporate for FileInfo
-import FileInfo from "../../public/data/FileInfo.json";
+// import FileInfo from "../../public/data/FileInfo.json";
 import { PermissionFileType } from '@/stores/FilePermissionStore'
+import axios from 'axios'
 
 
-export function useFileHook() {
-    const{setLoading} = useFileStore();
-
+export const useFileHook = () => {
+    const {setLoading} = useFileStore();
+    const {service1Axios} = axiosInstance();
     const fetchFiles = async(params : FetchFilesParams) => {
         setLoading(true);
         try {
-            const {service1Axios} = axiosInstance();
             const response = await service1Axios.get('/files/filter/with-permissions',{
-                params: {
-                    ...params,
-                    ...defaultFetchFilesParams
-                } 
+                params: params
             });
-            return response.data.data.data;
+            return response.data.data.files;
         }
         catch{
             toast.error('Failed to fetch files.')
@@ -39,24 +35,28 @@ export function useFileHook() {
 
     const addFile = async(payload : AddFilePayload , selectedFile: File) => {
         setLoading(true);
+        let toastId: number | string | undefined;
         try{
-            const {service1Axios} = axiosInstance();
             const response = await service1Axios.post('/files/add',payload);
             const putObjectUrl = response.data.data.put_object_url;
+            // console.log(putObjectUrl);
             // const uploadLoadValue = response.data.data.upload_lock_value;
             try{
+                toastId = toast.loading(`Uploading ${selectedFile.name}: 0%`);
                 const res = await axios.put(putObjectUrl,selectedFile,{
                     headers:{
-                        "Content-Type": selectedFile.type
+                        "x-amz-meta-x-amz-file-id": response.data.data.id,
+                        // "Content-Type": selectedFile.type
                     },
                     onUploadProgress: (progressEvent) => {
                         const percentCompleted = Math.round(
                           (progressEvent.loaded * 100) / (progressEvent.total || 1) 
                         );
-                        toast.loading(`Uploading ${selectedFile.name}: ${percentCompleted}%`);
+                        toast.loading(`Uploading ${selectedFile.name}: ${percentCompleted}%`, { id: toastId });
                     },
                 });
                 if (res.status === 200){
+                    toast.dismiss(toastId);
                     toast.success(`${selectedFile.name} uploaded successfully!`);
                     // try{
                     //     await service1Axios.patch(`/files/${response.data.data.id}/uploaded`,{
@@ -69,17 +69,21 @@ export function useFileHook() {
                     // }
                 }
                 else{
+                    toast.dismiss(toastId);
                     toast.error('There is errors why uploading file. Please try again.');
                     return;
                 }
             }
-            catch{
+            catch(error){
+                toast.dismiss(toastId);
+                console.log('Error uploading file:', error);
                 toast.error('There is errors why uploading file. Please try again.');
                 return;
             }
         }
         catch{
-            toast.error('There is errors why uplaoding file. Please try again.');
+            toast.dismiss(toastId);
+            toast.error('There is errors why uploading file. Please try again.');
             return;
         }
         finally{
@@ -90,7 +94,6 @@ export function useFileHook() {
     const recoverFile = async(id : string, destination_folder_id : string) => {
         try{
             setLoading(true);
-            const {service1Axios} = axiosInstance();
             await service1Axios.patch(`/files/${id}/recover`, {
                 params : {
                     "destination_folder_id": destination_folder_id,
@@ -110,12 +113,11 @@ export function useFileHook() {
     const softDeleteFile = async(id : string) => {
         try{
             setLoading(true);
-            const {service1Axios} = axiosInstance();
             await service1Axios.patch(`/files/${id}/soft-delete`);
         }
-        catch{
+        catch (error){
             toast.error("There is errors why deleting file. Please try again.");
-            return;
+            throw error;
         }
         finally{
             setLoading(false);
@@ -125,7 +127,6 @@ export function useFileHook() {
     const permanentDeleteFile = async(id : string) => {
         try{
             setLoading(true);
-            const {service1Axios} = axiosInstance();
             await service1Axios.patch(`/files/${id}/hard-delete`);
         }
         catch{
@@ -139,10 +140,10 @@ export function useFileHook() {
 
     const fetchFileById = async(id : string) => {
         try{
-            // const {service1Axios} = axiosInstance();
-            // const res = await service1Axios.get(`/files/${id}/metadata`);
-            // return res.data.data;
-            return FileInfo.data;
+            const {service1Axios} = axiosInstance();
+            const res = await service1Axios.get(`/files/${id}/metadata`);
+            return res.data.data;
+            // return FileInfo.data;
         }
         catch(error){
             throw error;
@@ -157,7 +158,6 @@ export function useFileHook() {
 
     const getPreviewUrl = async(id : string) => {
         try{
-            const {service1Axios} = axiosInstance();
             const res = await service1Axios.get(`/files/${id}/download-url`,{
                 params : {
                     preview : true
@@ -172,7 +172,6 @@ export function useFileHook() {
 
     const handleDownloadFile = async(id : string) => {
         try{
-            const {service1Axios} = axiosInstance();
             const res = await service1Axios.get(`/files/${id}/download-url`,{
                 params : {
                     preview : false
@@ -187,7 +186,6 @@ export function useFileHook() {
 
     const fetchSubFile = async(id : string, is_folder : boolean, sort_by : string, is_asc: boolean, offset : number, limit : number) => {
         try{
-            const {service1Axios} = axiosInstance();
             const res = await service1Axios.get(`/files/${id}/sub-file`,{
                 params :{
                     is_folder : is_folder,

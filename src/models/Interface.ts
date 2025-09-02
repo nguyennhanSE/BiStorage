@@ -1,31 +1,31 @@
 export interface FileFormat {
-    "created_at": number,
-    "deleted_at": number,
-    "description": string,
-    "id": string,
-    "is_deleted": boolean,
-    "is_folder": boolean,
-    "name": string,
-    "opened_at": number,
-    "owner_id": string,
-    "parent_folder_id": string,
-    "permissions": [
+    created_at: number,
+    deleted_at: number,
+    description: string,
+    id: string,
+    is_deleted: boolean,
+    is_folder: boolean,
+    name: string,
+    opened_at: number,
+    owner_id: string,
+    parent_folder_id: string,
+    permissions: [
         {
-        "email": string,
-        "first_name": string,
-        "last_name": string,
-        "permission_type": number,
-        "user_id": string,
-        "user_image": string
+        email: string,
+        first_name: string,
+        last_name: string,
+        permission_type: number,
+        user_id: string,
+        user_image: string
         }
     ],
-    "storage_detail": {
-        "file_size": number,
-        "mime_type": string
+    storage_detail: {
+        file_size: number,
+        mime_type: string
     },
-    "tag_ids": string[],
-    "total_size": number,
-    "updated_at": number
+    tag_ids: string[],
+    total_size: number,
+    updated_at: number
 }
 
 export interface Tag {
@@ -94,14 +94,14 @@ export interface FilePermission {
 
 // các interface có body Axios Request:
 export interface AddFilePayload {
-    "description": string,
-    "is_folder": true,
-    "name": string,
-    "parent_folder_id": string,
-    "storage_detail": {
-        "size": number
+    description?: string,
+    is_folder?: boolean,
+    name?: string,
+    parent_folder_id?: string,
+    storage_detail: {
+        size: number
     },
-    "tag_ids": string[]
+    tag_ids?: string[]
 }
 
 export interface FetchFilesParams {

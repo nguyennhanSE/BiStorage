@@ -89,7 +89,7 @@ const Sidebar = () => {
                 </div>
                 {/* Memory */}
             </div>
-            {isOpen && <UploadButton setIsOpen={setIsOpen}></UploadButton>}
+            {isOpen && <UploadButton setIsOpen={setIsOpen}/>}
         </section>
     )
 }

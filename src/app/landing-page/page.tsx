@@ -18,8 +18,10 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { LuGithub } from "react-icons/lu";
 import { FaRegCopyright } from "react-icons/fa";
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
+    const router = useRouter();
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isPlaying,setIsPlaying] = useState(false);
     const handlePlay = () => {
@@ -66,7 +68,7 @@ return(
                             <span className='text-5xl text-[#3a2f2b] the-perfect-home'>Platform</span>
                             <span className='text-lg text-[#3a2f2b]'>/ We take responsibility for your files and folders /</span>
                             <div>
-                                <button className='w-[120px] h-[40px] text-center text-md text-white rounded-full bg-[#3a2f2b]'>START</button>
+                                <button onClick={() => router.push('/dashboard')} className='w-[120px] h-[40px] text-center text-md text-white rounded-full bg-[#3a2f2b] cursor-pointer'>START</button>
                             </div>
                         </div>
                         <div className="w-[40%] h-full mr-5">
