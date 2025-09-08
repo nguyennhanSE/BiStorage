@@ -25,7 +25,10 @@ export function LoginExpired() {
                             <span className="text-gray-500 text-base">Please log in again to continue. Don&apos;t worry, we kept all of your filters and breakdowns in place.</span>
                         </div>
                     </div>
-                    <button onClick={() => router.push('/sign-in')} className="px-10 py-2 text-center text-white bg-[#0E5F6B] hover:bg-[#073D44] rounded-xl transition-colors duration-200">
+                    <button onClick={() => {
+                        useLoginExpiredStore.getState().setLoginExpired(false);
+                        router.push('/sign-in');
+                    }} className="px-10 py-2 text-center text-white bg-[#0E5F6B] hover:bg-[#073D44] rounded-xl transition-all duration-200 ease-out cursor-pointer hover:shadow-lg active:scale-95 hover:scale-105 ">
                         Log In
                     </button>
                 </div>

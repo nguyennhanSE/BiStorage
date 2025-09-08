@@ -1,6 +1,6 @@
 'use client'
 
-import Sidebar from "@/components/sidebar/Sidebar";
+
 import React from "react";
 import "./adjust.css";
 export default function Layout({children}:{children : React.ReactNode}) {
@@ -53,6 +53,7 @@ import { RiFolderVideoFill } from "react-icons/ri";
 import { MdOutlineAudioFile } from "react-icons/md";
 import { FaFileZipper } from "react-icons/fa6";
 import ChatPanel from "@/components/MiniChatBox/ChatPanel";
+import Sidebar from "@/components/SideBar/Sidebar";
 
 const SpaceMenu = ({setShowSpaceMenu} : {setShowSpaceMenu : (show : boolean) => void}) => {
   const [activePrice,setActivePrice] = React.useState(false);

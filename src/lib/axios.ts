@@ -1,6 +1,6 @@
 'use client'
 
-// import { useLoginExpiredStore } from '@/stores/LoadingStore';
+import { useLoginExpiredStore } from '@/stores/LoadingStore';
 import axios from 'axios'
 export const axiosInstance = () => {
     const createAxiosInstance = (url : string) => {
@@ -16,13 +16,13 @@ export const axiosInstance = () => {
     service1Axios.interceptors.request.use((config) => {
         // Do something before request is sent
         const accessToken = localStorage.getItem('access_token');
-        // const {setLoginExpired} = useLoginExpiredStore();
         if (accessToken) {
             config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
-        // else {
-        //     setLoginExpired(true);
-        // }
+        else {
+            useLoginExpiredStore.getState().setLoginExpired(true);
+            return Promise.reject('No access token found');
+        }
         return config;
     }, (error) => {
         // Do something with request error

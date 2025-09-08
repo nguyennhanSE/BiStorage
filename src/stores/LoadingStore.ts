@@ -17,5 +17,5 @@ export const useLoadingStore = create<LoadingStore>((set) => ({
 
 export const useLoginExpiredStore = create<LoginExpiredStore>((set) => ({
     loginExpired: false,
-    setLoginExpired: (loginExpired: boolean) => set({ loginExpired }),
+    setLoginExpired: (loginExpired: boolean) => set({ loginExpired : loginExpired }),
 }))
